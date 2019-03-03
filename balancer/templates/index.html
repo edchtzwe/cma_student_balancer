@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div>
+    <h1>All Students:</h1>
+    <div>
+    {% if all_students %}
+    <ul>
+      {% for student in all_students %}
+      <li>
+        <a href="{{ student.get_absolute_url }}">{{ student.first_name }}, {{ student.surname }}, {{ student.given_name }} : &dollar;{{ student.balance }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>There is nobody stored in the database.</p>
+    {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
