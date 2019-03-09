@@ -4,3 +4,22 @@
     float: left;
 }
 
+.sidebar-nav-items {
+    list-style: none;
+}
+
+.form-field-label {
+    float: left;
+    margin-right: 5px;
+    background-color: #82D591;
+    min-width: 256px;
+    text-align: right;
+}
+
+.form-div {
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 20px;
+  display: table-cell;
+  /* display: inline-block; */
+}
