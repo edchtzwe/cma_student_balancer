@@ -1,10 +1,16 @@
+# Django imports
 from django.shortcuts import render
-from balancer.models import Student
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+# model imports
+from balancer.models import Student
 from balancer.forms import StudentForm
+# python imports
 import sys
-
+########################################
+########################################
 def index(request):
     num_students = Student.objects.all().count()
     all_students = Student.objects.all()
@@ -17,7 +23,7 @@ def index(request):
         'all_students':all_students,
         },
     )
-
+########################################
 class StudentDetailView(generic.DetailView):
     model = Student
 
@@ -27,12 +33,7 @@ class StudentDetailView(generic.DetailView):
         # Add in a QuerySet of all the books
         # context['book_list'] = Book.objects.all()
         return context
-
-# class StudentCreate(CreateView):
-    # model = Student
-    # fields = ['first_name', 'surname', 'given_name', 'balance']
-
-
+########################################
 def StudentCreate(request):
     form = None
 
@@ -49,6 +50,7 @@ def StudentCreate(request):
                 student_hash[field] = form.cleaned_data[field]
             record = Student(**student_hash)
             record.save()
+            return HttpResponseRedirect(reverse('student-detail', args=[str(record.pk)]) )
     else:
         form = StudentForm(initial={'balance': 0.0})
 
