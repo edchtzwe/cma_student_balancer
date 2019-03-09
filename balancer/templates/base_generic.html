@@ -22,7 +22,8 @@
 <div class="sidebar-nav">
     {% block sidebar %}
     <ul>
-    <li style="list-style: none;"><a href="{% url 'index' %}">Home</a></li>
+    <li class="sidebar-nav-items"><a href="{% url 'index' %}">Home</a></li>
+    <li class="sidebar-nav-items"><a href="{% url 'student_create' %}">Add Student</a></li>
     </ul> 
     {% endblock %}
 </div>
