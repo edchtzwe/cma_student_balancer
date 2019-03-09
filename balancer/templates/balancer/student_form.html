@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="{% url 'student_create' %}" method="post">
+<form action="{% url 'student-create' %}" method="post">
 {% csrf_token %}
 <div class="form-div">
 {% for field in form %}
