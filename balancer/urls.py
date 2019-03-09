@@ -4,4 +4,5 @@ from .import views
 urlpatterns = [
     path('', views.index, name='index'),
     re_path('student/(?P<pk>\d+)', views.StudentDetailView.as_view(), name='student-detail'),
+    path('student/create/', views.StudentCreate, name='student_create'),
 ]
