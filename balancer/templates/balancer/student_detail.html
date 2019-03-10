@@ -3,9 +3,26 @@
 {% block content %}
 
 <h1>{{ student.first_name }}, {{ student.surname }}, {{ student.given_name }}</h1>
+
+<div class="form-div">
+
 <h2>Current Balance&nbsp;&colon;&nbsp;&dollar;{{ student.balance }}</h2>
-<form action="#" method="post">
+
+<form action="{% url 'student-operation' %}" id="form-id-1" method="post">
+{% csrf_token %}
+
+<div>
 <input type='text' id='new_balance' name='new_balance'>
+</div>
+
+<input type='hidden' id='student-id' name='student-id' value={{ student.pk }}>
+
+<div class="button-div">
+<input type="submit" value="Delete" name="delete">
+</div>
+
 </form>
+
+</div>
 {% endblock %}
 
