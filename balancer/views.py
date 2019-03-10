@@ -1,7 +1,6 @@
 # Django imports
 from django.shortcuts import render
 from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 # model imports
@@ -9,11 +8,12 @@ from balancer.models import Student
 from balancer.forms import StudentForm
 # python imports
 import sys
+import re
 ########################################
 ########################################
 def index(request):
-    num_students = Student.objects.all().count()
     all_students = Student.objects.all()
+    num_students = len(all_students)
 
     return render(
         request,
@@ -21,6 +21,28 @@ def index(request):
         context={
         'num_students':num_students,
         'all_students':all_students,
+        },
+    )
+    
+def index_plus(request, result):
+    num_students = Student.objects.all().count()
+    all_students = Student.objects.all()
+
+    result_info = ''
+
+    if result.lower() == 'student-delete-success':
+        result_info = 'Student successfully deleted'
+
+    if not re.search("\S+", result_info):
+        result_info = False
+
+    return render(
+        request,
+        'index.html',
+        context={
+        'num_students':num_students,
+        'all_students':all_students,
+        'result_info':result_info,
         },
     )
 ########################################
@@ -50,7 +72,7 @@ def StudentCreate(request):
                 student_hash[field] = form.cleaned_data[field]
             record = Student(**student_hash)
             record.save()
-            return HttpResponseRedirect(reverse('student-detail', args=[str(record.pk)]) )
+            return HttpResponseRedirect( reverse('student-detail', args=[str(record.pk)]) )
     else:
         form = StudentForm(initial={'balance': 0.0})
 
@@ -59,3 +81,24 @@ def StudentCreate(request):
     }
 
     return render(request, 'balancer/student_form.html', context)
+########################################
+def StudentDelete(request, student_obj):
+    if not re.search("\S+", str(student_obj.pk)):
+        return False
+    else:
+        student_obj.delete()
+        return True
+########################################
+def StudentModifyDelete(request):
+    if request.method == 'POST':
+        if 'delete' in request.POST:
+            if 'student-id' in request.POST:
+                student_obj = Student.objects.get(pk=request.POST['student-id'])
+                if StudentDelete(request, student_obj):
+                    return HttpResponseRedirect( reverse('index-plus', args=['student-delete-success']) )
+                else:
+                    return HttpResponseRedirect( reverse('index-plus', args=['student-delete-fail']) )
+    else:
+        return HttpResponseRedirect( reverse('index-plus', args=['student-operation-fail']) )
+
+    return HttpResponseRedirect( reverse('index') )
