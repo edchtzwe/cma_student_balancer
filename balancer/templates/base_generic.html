@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  {% block title %}<title>CMA Student Balancer</title>{% endblock %}
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Add additional CSS in static file -->
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-  <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
-  <script src="{% static 'js/base.js' %}"></script>
+    {% block title %}<title>CMA Student Balancer</title>{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load static %}
+    <!-- localy defind CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- JQuery -->
+    <script src="{% static 'JQuery/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap-4.2.1-dist/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap-4.2.1-dist/js/bootstrap.min.js' %}"></script>
 </head>
 <body>
 
@@ -36,22 +36,7 @@
 
 <div style="clear: both;"></div>
 
-<script type='text/javascript'>
-function FocusOnFirstTextInput()
-{
-    var text_inputs = $("form#form-id-1 :input[type='text']");
-    text_inputs[0].focus();
-}
-FocusOnFirstTextInput();
-
-function ClearAllTextInput()
-{
-    $("form#form-id-1 :input[type='text']").each(function(){
-        var input = $(this);
-        input.val('');
-    });
-}
-</script>
+<script type='text/javascript'>FocusOnFirstTextInput();</script>
 
 </body>
 </html>
