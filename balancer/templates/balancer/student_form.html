@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<h1>Student Creation Form:</h1>
+
 <form action="{% url 'student-create' %}" id="form-id-1" method="post">
 {% csrf_token %}
 <div class="form-div">
@@ -10,7 +12,7 @@
 <div style="float: left; max-width: 512px;">{{ field }}</div>
 <div style="clear: both;"></div>
 {% endfor %}
-<div style="margin-top: 10px;">
+<div class="button-div">
 <input type="submit" value="Submit">
 </div>
 </div>
