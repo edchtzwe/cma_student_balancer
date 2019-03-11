@@ -96,5 +96,5 @@ def StudentModifyDelete(request):
                 student_obj = Student.objects.get(pk=request.POST['student-id'])
                 if StudentDelete(request, student_obj):
                     index_plus(request, 'student-delete-success')
-    else:
-        index(request);
+
+    return HttpResponseRedirect( reverse('index') )
