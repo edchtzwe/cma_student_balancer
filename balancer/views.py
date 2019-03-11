@@ -23,7 +23,7 @@ def index(request):
         'all_students':all_students,
         },
     )
-    
+########################################
 def index_plus(request, result):
     num_students = Student.objects.all().count()
     all_students = Student.objects.all()
@@ -95,10 +95,6 @@ def StudentModifyDelete(request):
             if 'student-id' in request.POST:
                 student_obj = Student.objects.get(pk=request.POST['student-id'])
                 if StudentDelete(request, student_obj):
-                    return HttpResponseRedirect( reverse('index-plus', args=['student-delete-success']) )
-                else:
-                    return HttpResponseRedirect( reverse('index-plus', args=['student-delete-fail']) )
+                    index_plus(request, 'student-delete-success')
     else:
-        return HttpResponseRedirect( reverse('index-plus', args=['student-operation-fail']) )
-
-    return HttpResponseRedirect( reverse('index') )
+        index(request);
