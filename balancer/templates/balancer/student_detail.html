@@ -12,13 +12,19 @@
 {% csrf_token %}
 
 <div>
-<input type='text' id='new_balance' name='new_balance'>
+{% for field in form %}
+<div class="form-field-label">{{ field.label_tag }}</div>
+<div style="float: left; max-width: 512px;">{{ field }}</div>
+<div style="clear: both;"></div>
+{% endfor %}
 </div>
 
 <input type='hidden' id='student-id' name='student-id' value={{ student.pk }}>
 
 <div class="button-div">
-<input type="submit" value="Delete" name="delete">
+<input type="submit" value="Commit" name="modify">
+<input type="submit" value="Delete" name="delete" style="float: right;">
+<div style="clear: both;"></div>
 </div>
 
 </form>
