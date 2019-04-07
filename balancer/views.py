@@ -148,15 +148,16 @@ def StudentCommitModify(request, student_obj):
 def StudentModifyDelete(request):
     if request.method == 'POST':
         student_obj = None
-
+        print(request.POST);
         if 'student-id' in request.POST:
             student_obj = Student.objects.get(pk=request.POST['student-id'])
         if student_obj:
-            if 'delete' in request.POST:
-                if StudentDelete(request, student_obj):
-                    return index_plus(request, 'student-delete-success')
-            elif 'modify' in request.POST:
-                if StudentCommitModify(request, student_obj):
-                    return HttpResponseRedirect( reverse('student-detail', args=[str(student_obj.pk)]) )
+            if 'form-action' in request.POST:
+                if request.POST['form-action'] == 'delete':
+                    if StudentDelete(request, student_obj):
+                        return index_plus(request, 'student-delete-success')
+                elif request.POST['form-action'] == 'modify':
+                    if StudentCommitModify(request, student_obj):
+                        return HttpResponseRedirect( reverse('student-detail', args=[str(student_obj.pk)]) )
 
     return HttpResponseRedirect( reverse('index') )
