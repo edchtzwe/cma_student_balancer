@@ -1,5 +1,9 @@
+.banner-div {
+    margin-bottom: 30px;
+}
+
 .sidebar-nav {
-    width: 30%;
+    width: 25%;
     height: 70%;
     float: left;
 }
@@ -8,12 +12,25 @@
     list-style: none;
 }
 
-.form-field-label {
+.form-label-div {
     float: left;
-    margin-right: 5px;
     background-color: #82D591;
     min-width: 256px;
     text-align: right;
+}
+
+.form-label-span {
+    margin-right: 5px;
+}
+
+.form-data-div {
+    float: left;
+    min-width: 55%;
+    border: 1px solid #F1F1F1;
+}
+
+.form-data-span {
+    margin-left: 5px;
 }
 
 .form-div {
@@ -21,6 +38,7 @@
   border: 2px solid #73AD21;
   padding: 20px;
   display: table-cell;
+  min-width: 75%;
   /* display: inline-block; */
 }
 
@@ -41,4 +59,8 @@ input[type=text]:focus, textarea:focus {
 
 .alert-box {
     max-width: 95%;
+}
+
+.num-td, .num-th {
+    text-align: right;
 }
