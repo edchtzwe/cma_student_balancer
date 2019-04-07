@@ -13,17 +13,18 @@
 
 <div>
 {% for field in form %}
-<div class="form-field-label">{{ field.label_tag }}</div>
-<div style="float: left; max-width: 512px;">{{ field }}</div>
+<div class="form-label-div"><span class="form-label-span">{{ field.label_tag }}</span></div>
+<div class="form-data-div"><span class="form-data-span">{{ field }}</span></div>
 <div style="clear: both;"></div>
 {% endfor %}
 </div>
 
 <input type='hidden' id='student-id' name='student-id' value={{ student.pk }}>
+<input type='hidden' id='form-action' name='form-action' value="modify">
 
 <div class="button-div">
-<input type="submit" value="Commit" name="modify">
-<input type="submit" value="Delete" name="delete" style="float: right;">
+<input type="button" value="Commit" name="modify" onclick="SetFormActionThenSubmit({'form-action':'modify'});">
+<input type="button" value="Delete" name="delete" style="float: right;" onclick="FormPreSubmitConfirmation(this.name, {action:'delete'});">
 <div style="clear: both;"></div>
 </div>
 
