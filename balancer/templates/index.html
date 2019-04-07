@@ -11,15 +11,33 @@
 
 <div>
     <h1>All Students:</h1>
-    <div>
+    <div class="table-responsive">
     {% if all_students %}
-    <ul>
-      {% for student in all_students %}
-      <li>
-        <a href="{{ student.get_absolute_url }}">{{ student.first_name }}, {{ student.surname }}, {{ student.given_name }} : &dollar;{{ student.balance }}</a>
-      </li>
-      {% endfor %}
-    </ul>
+    <table class="table table-condensed table-hover">
+    <!-- <table> -->
+    <tr>
+    <th>First Name</th>
+    <th>Surname</th>
+    <th>Given Name</th>
+    <th class="num-th">Balance</th>
+    </tr>
+    {% for student in all_students %}
+    <tr>
+    <td>
+    <a href="{{ student.get_absolute_url }}">{{ student.first_name }}</a>
+    </td>
+    <td>
+    {{ student.surname }}
+    </td>
+    <td>
+    {{ student.given_name }}
+    </td>
+    <td class="num-td">
+    &dollar;{{ student.balance }}
+    </td>
+    </tr>
+    {% endfor %}
+    </table>
     {% else %}
       <p>There is nobody stored in the database.</p>
     {% endif %}
