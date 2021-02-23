@@ -10,19 +10,41 @@
 {% endif %}
 
 <div>
+    <div id="filter-div">
+    <form action="{{ filter_form_action }}" id="filter-form" method="get">
+    <input type="text" id='keyword' placeholder="Enter Search Keyword">
+    <button type="submit" id="filter-form-submit" style="border-radius: 6px;">Search</button>
+    </form>
+    </div>
+
+    <hr/>
+
     <h1>All Students:</h1>
+    <div id="navi_link" style="margin-bottom:5px;">
+        {% if prev_link %}
+        <a href="{% url 'index' %}{{ prev_link }}">Prev</a>
+        {% endif %}
+
+        {% if next_link %}
+        <a href="{% url 'index' %}{{ next_link }}">Next</a>
+        {% endif %}
+    </div>
     <div class="table-responsive">
-    {% if all_students %}
+    {% if paginated_queryset %}
     <table class="table table-condensed table-hover">
     <!-- <table> -->
     <tr>
+    <th class="num-th">Count</th>
     <th>First Name</th>
     <th>Surname</th>
     <th>Given Name</th>
     <th class="num-th">Balance</th>
     </tr>
-    {% for student in all_students %}
+    {% for student in paginated_queryset %}
     <tr>
+    <td class="num-td">
+    {{ forloop.counter }}
+    </td>
     <td>
     <a href="{{ student.get_absolute_url }}">{{ student.first_name }}</a>
     </td>
@@ -42,7 +64,15 @@
       <p>There is nobody stored in the database.</p>
     {% endif %}
     </div>
-</div>
+    <div id="navi_link">
+        {% if prev_link %}
+        <a href="{% url 'index' %}{{ prev_link }}">Prev</a>
+        {% endif %}
 
+        {% if next_link %}
+        <a href="{% url 'index' %}{{ next_link }}">Next</a>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock %}

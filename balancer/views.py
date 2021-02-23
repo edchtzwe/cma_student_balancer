@@ -6,43 +6,26 @@ from django.urls import reverse
 # model imports
 from balancer.models import Student
 from balancer.forms import StudentForm, StudentModifyForm
-# python imports
-import sys
-import re
+# other imports
+from balancer.modules.Student import GetStudentIndexContext
 ########################################
-########################################
-# utility functions
-def IsEmpty(p_string):
-    # at least one non-space character
-    if not re.search("\S+", str(p_string)):
-        return True
-    return False;
-
-def ModelObjToPyDict(p_model_object):
-    py_dict = dict()
-    model_fields = p_model_object.get_iterable_fields()
-
-    for field in model_fields:
-        py_dict[field] = getattr(p_model_object, field)
-    return py_dict
-
-def IsNumber(p_value):
-    if re.search("\d+\.?\d*", str(p_value)):
-        return True
-    return False;
 ########################################
 # views
-def index(request):
-    all_students = Student.objects.all()
-    num_students = len(all_students)
-
+########################################
+# index views
+########################################
+# url/page=\d
+def index(request, page=0):
+    context = GetStudentIndexContext({
+        'limit': 10,
+        'page' : page,
+    })
+        
+    # return the context
     return render(
         request,
         'index.html',
-        context={
-        'num_students':num_students,
-        'all_students':all_students,
-        },
+        context,
     )
 ########################################
 def index_plus(request, result):
@@ -71,6 +54,9 @@ def index_plus(request, result):
         'result_info' :result_info,
         },
     )
+
+########################################
+# Student Forms
 ########################################
 class StudentDetailView(generic.DetailView):
     model = Student
@@ -161,3 +147,7 @@ def StudentModifyDelete(request):
                         return HttpResponseRedirect( reverse('student-detail', args=[str(student_obj.pk)]) )
 
     return HttpResponseRedirect( reverse('index') )
+########################################
+def StudentFind(request):
+    params = request.GET
+    keyword = params['keyword']

@@ -12,6 +12,12 @@
     list-style: none;
 }
 
+.content-block {
+    width: 70%;
+    height: 70%;
+    float: left;
+}
+
 .form-label-div {
     float: left;
     background-color: #82D591;

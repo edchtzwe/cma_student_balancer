@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- JQuery -->
     <script src="{% static 'JQuery/jquery-3.3.1.js' %}"></script>
+    <!-- Local JS -->
     <script src="{% static 'js/base.js' %}"></script>
     <!-- BootStrap -->
     <link rel="stylesheet" href="{% static 'bootstrap-4.2.1-dist/css/bootstrap.min.css' %}">
@@ -32,7 +33,7 @@
     {% endblock %}
 </div>
 
-<div style="width: 70%; height: 70%; float: left;">
+<div class="content-block">
 {% block content %}{% endblock %}
 </div>
 
